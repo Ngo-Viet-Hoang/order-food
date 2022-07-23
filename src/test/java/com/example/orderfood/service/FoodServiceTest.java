@@ -2,6 +2,7 @@ package com.example.orderfood.service;
 
 import com.example.orderfood.OrderFoodApplication;
 import com.example.orderfood.entity.*;
+import com.example.orderfood.entity.entityEnum.OrderStatus;
 import com.example.orderfood.repository.CategoryRepository;
 import com.example.orderfood.repository.FoodRepository;
 import com.example.orderfood.repository.OrderRepository;
@@ -35,19 +36,19 @@ class FoodServiceTest {
     @Test
     public void testFood() {
 
-//        Category category = new Category();
-//        category.setName("nuongw");
-//        categoryRepository.save(category);
-//        Food food1 = Food.builder()
-//                .name("Food 1")
-//                .category(category)
-//                .build();
-//        Food food2 = Food.builder()
-//                .name("Food2")
-//                .category(category)
-//                .build();
-//        foodRepository.save(food1);
-//        foodRepository.save(food2);
+        Category category = new Category();
+        category.setName("nuongw");
+        categoryRepository.save(category);
+        Food food1 = Food.builder()
+                .name("Food 1")
+                .category(category)
+                .build();
+        Food food2 = Food.builder()
+                .name("Food2")
+                .category(category)
+                .build();
+        foodRepository.save(food1);
+        foodRepository.save(food2);
 
         List<Food> foods = foodRepository.findAll();
         foods.forEach(e->{
@@ -56,7 +57,7 @@ class FoodServiceTest {
         Order order = Order.builder()
                 .id(System.currentTimeMillis())
                 .createdAt(LocalDateTime.now())
-                .status(1)
+                .status(OrderStatus.STOP)
                 .build();
         System.out.println("Order: "+ order.getId());
         HashSet<OrderDetail> orderDetails = new HashSet<>();
@@ -73,6 +74,8 @@ class FoodServiceTest {
                     .description("do an ngon")
                     .quantity(10)
                     .unitPrice(0)
+                    .createBy("hello")
+                    .updatedBy("eeo")
                     .build();
             orderDetails.add(orderDetail);
         }

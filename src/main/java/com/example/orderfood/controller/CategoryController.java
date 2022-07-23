@@ -26,22 +26,22 @@ public class CategoryController {
         return "view/categories/create";
     }
     @RequestMapping(path = "/create", method = RequestMethod.POST)
-    public String processSaveFood(@Valid @ModelAttribute("food") Category category,
+    public ResponseEntity<?> processSaveFood(@Valid @ModelAttribute("food") Category category,
                                   BindingResult bindingResult,
                                   Model model){
         if(bindingResult.hasErrors()){
             model.addAttribute("category",category);
-            return "view/categories/create";
+            return ResponseEntity.badRequest().build();
         }
         categoryService.save(category);
-        return "redirect:/admin/categories/create";
+        return ResponseEntity.ok(category);
     }
     @RequestMapping(path = "list" , method = RequestMethod.GET)
-    public String findAll(@RequestParam(value = "page",defaultValue = "1") int page,
+    public ResponseEntity<?> findAll(@RequestParam(value = "page",defaultValue = "1") int page,
                           @RequestParam(value = "limit",defaultValue = "10")int limit,
                           Model model){
         model.addAttribute("Pageable",categoryService.findAll(page, limit));
-        return "view/cateogies/list";
+        return ResponseEntity.ok(categoryService);
     }
     @RequestMapping(method = RequestMethod.PUT, path = "{id}")
     public ResponseEntity<Category> update(@PathVariable Long id, @RequestBody Category category) {

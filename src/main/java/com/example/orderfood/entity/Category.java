@@ -2,8 +2,11 @@ package com.example.orderfood.entity;
 
 import com.example.orderfood.entity.basic.BaseEntity;
 import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
+import org.springframework.data.annotation.LastModifiedDate;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @Getter
 @Setter
@@ -12,9 +15,16 @@ import javax.persistence.*;
 @Entity
 @Builder
 @Table(name = "categories")
-public class Category extends BaseEntity {
+public class Category  {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String name;
+    private String createBy;
+    private String updatedBy;
+    @CreationTimestamp
+    private LocalDateTime createdAt = LocalDateTime.now();
+    @LastModifiedDate
+    private LocalDateTime updatedAt;
+    private LocalDateTime deletedAt;
 }

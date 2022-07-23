@@ -32,6 +32,8 @@ public class MySercurityConfig extends WebSecurityConfigurerAdapter {
         http.cors().and().csrf().disable();
         http.authorizeRequests().antMatchers("/api/v1/accounts/*").permitAll();
         http.authorizeRequests().antMatchers("api/v1/user/*").hasAnyAuthority("USER","ADMIN");
+        http.authorizeRequests().antMatchers("api/v1/foods/*").hasAnyAuthority("ADMIN");
+        http.authorizeRequests().antMatchers("api/v1/categories/**").hasAnyAuthority("ADMIN");
         http.authorizeRequests().antMatchers("api/v1/admin/*").hasAnyAuthority("ADMIN");
         http.addFilterBefore(
                 new MyAuthorizationFilter(), UsernamePasswordAuthenticationFilter.class);

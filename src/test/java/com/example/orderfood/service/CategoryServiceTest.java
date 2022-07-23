@@ -21,12 +21,16 @@ class CategoryServiceTest {
     CategoryRepository categoryRepository;
 
     @Test
-    public void saveCateogry() {
+    public void saveCategogy() {
         Category category1 = Category.builder()
                 .name("Category1")
+                .createBy("heoo")
+                .updatedBy("122")
                 .build();
         Category category2 = Category.builder()
                 .name("Category3")
+                .createBy("hepp")
+                .updatedBy("hfee")
                 .build();
         categoryRepository.save(category1);
         categoryRepository.save(category2);
