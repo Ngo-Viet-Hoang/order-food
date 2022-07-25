@@ -9,6 +9,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.springframework.data.annotation.LastModifiedDate;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Getter
@@ -34,15 +35,6 @@ public class OrderDetail  {
     @JoinColumn(name = "food_id", insertable = false, updatable = false)
     @JsonManagedReference
     private Food food;
-    private String image;
-    private String description;
-    private int quantity;
-    private double unitPrice;
-    private String createBy;
-    private String updatedBy;
-    @CreationTimestamp
-    private LocalDateTime createdAt = LocalDateTime.now();
-    @LastModifiedDate
-    private LocalDateTime updatedAt;
-    private LocalDateTime deletedAt;
+    private Integer quantity;
+    private BigDecimal unitPrice;
 }

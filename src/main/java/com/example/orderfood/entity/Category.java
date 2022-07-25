@@ -20,11 +20,4 @@ public class Category  {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String name;
-    private String createBy;
-    private String updatedBy;
-    @CreationTimestamp
-    private LocalDateTime createdAt = LocalDateTime.now();
-    @LastModifiedDate
-    private LocalDateTime updatedAt;
-    private LocalDateTime deletedAt;
 }

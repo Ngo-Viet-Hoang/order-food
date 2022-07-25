@@ -36,12 +36,20 @@ public class CategoryController {
         categoryService.save(category);
         return ResponseEntity.ok(category);
     }
+//    @RequestMapping(method = RequestMethod.GET, path = "{id}")
+//    public ResponseEntity<?> getDetail(@PathVariable Long id) {
+//        Optional<Category> optionalCategory = categoryService.findById(id);
+//        if (!optionalCategory.isPresent()) {
+//            ResponseEntity.badRequest().build();
+//        }
+//        return ResponseEntity.ok(optionalCategory.get());
+//    }
     @RequestMapping(path = "list" , method = RequestMethod.GET)
     public ResponseEntity<?> findAll(@RequestParam(value = "page",defaultValue = "1") int page,
                           @RequestParam(value = "limit",defaultValue = "10")int limit,
                           Model model){
         model.addAttribute("Pageable",categoryService.findAll(page, limit));
-        return ResponseEntity.ok(categoryService);
+        return ResponseEntity.ok(model.addAttribute("Pageable", categoryService.findAll(page, limit)));
     }
     @RequestMapping(method = RequestMethod.PUT, path = "{id}")
     public ResponseEntity<Category> update(@PathVariable Long id, @RequestBody Category category) {
